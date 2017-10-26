@@ -1,0 +1,43 @@
+<div class="alert alert-danger col-lg-6" role="alert" *ngIf="pswGood">
+  <strong>Oh a habido un error!</strong> Los passwords no coinciden
+</div>
+<div class="alert alert-danger col-lg-6" role="alert" *ngIf="userGood">
+  <strong>Atencion!</strong> El usuario ya existe
+</div>
+
+
+<div class="col-sm-4 form-group-lg">
+  <fieldset class="form-group">
+  <legend>Registro</legend>
+  
+<form #registroForm="ngForm" (ngSubmit)="registro(registroForm)" novalidate>
+
+  
+  
+  <div class="form-group" *ngIf="user.user">
+    <label for="formGroupExampleInput">Email</label>
+
+    <input type="text" name="user" [(ngModel)]="user.user"  class="form-control" (keyup)="userExist()" id="formGroupExampleInput" placeholder="Email" required>
+  
+  </div>
+
+  
+  <div class="form-group" *ngIf="!active">
+    <label for="formGroupExampleInput2">Password</label>
+    <input type="text" name="password" [(ngModel)]="user.password" class="form-control" id="formGroupExampleInput2" placeholder="Password" required>
+  </div>
+
+  <div class="form-group" *ngIf="!active">
+      <label for="formGroupExampleInput2">Password</label>
+      <input type="text" name="psw2" [(ngModel)]="password2" class="form-control" id="formGroupExampleInput2" placeholder="Repite password" required>
+  </div>
+
+    <hr>
+    <button type="submit" *ngIf="!active" class="btn btn-primary"  [disabled]="!registroForm.form.valid || userGood" >Registrar</button>
+    <button type="button" *ngIf="active" class="btn btn-success" (click)="updateUser()" [disabled]="userGood">Actualizar</button>
+
+  
+    
+</form>
+  </fieldset>
+</div>

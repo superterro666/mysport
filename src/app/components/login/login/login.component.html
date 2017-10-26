@@ -1,0 +1,25 @@
+
+<form class="form-inline" >
+  <label class="sr-only" for="inlineFormInput">Usuario</label>
+  <input type="text" name="user" [(ngModel)]="user" class="form-control mb-2 mr-sm-2 mb-sm-0" id="inlineFormInput" placeholder="Usuario">
+
+  <label class="sr-only" for="inlineFormInputGroup">Password</label>
+  <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+    
+    <input type="text" name="password" [(ngModel)]="password" class="form-control" id="inlineFormInputGroup" placeholder="Password">
+  </div>
+
+  <div class="form-check mb-2 mr-sm-2 mb-sm-0">
+    <label class="form-check-label">
+      <input class="form-check-input" (change)="recordPsw($event)" type="checkbox"> Recordar
+    </label>
+  </div>
+    <div class="form-check mb-2 mr-sm-2 mb-sm-0">
+      <label class="form-check-label">
+        <div><a  [routerLink]="['/registro', 'register']"><small>Registro</small></a></div>
+      </label>
+    </div>
+
+  <button type="submit" (click)="submit()" class="btn btn-primary">Enviar</button>
+  
+</form>
