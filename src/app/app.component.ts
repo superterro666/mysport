@@ -1,5 +1,5 @@
 import { Component, OnInit, DoCheck, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
-import { LoginService } from "./components/login/servicios/login.service";
+import { LoginService } from './components/login/servicios/login.service';
 import { RegistroService } from './components/login/servicios/registro.service';
 
 
@@ -16,17 +16,16 @@ export class AppComponent implements OnInit, DoCheck {
   }
 
   ngDoCheck() {
-    this._login.checkToken.subscribe(data => {
+    this._login.checkToken$.subscribe(data => {
       this.logueado = data;
       this.cdRef.markForCheck();
-      
       });
-    this._login.isLogin.subscribe(data => {
+    this._login.isLogin$.subscribe(data => {
       this.logueado = data;
       this.cdRef.markForCheck();
     });
 
-    this._registro.goodRegistro$.subscribe(data =>{
+    this._registro.goodRegistro$.subscribe(data => {
       this.logueado = data;
       this.cdRef.markForCheck();
     })

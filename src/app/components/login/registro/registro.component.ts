@@ -18,23 +18,22 @@ export class RegistroComponent implements OnInit, DoCheck {
   private user: User;
   private active: boolean;
 
-  constructor(private _registroService: RegistroService, 
-    private cdRef: ChangeDetectorRef, 
+  constructor(private _registroService: RegistroService,
+    private cdRef: ChangeDetectorRef,
     private route: ActivatedRoute,
-    private router: Router) { 
-    this.user = new User(0,'','','null');
+    private router: Router) {
+    this.user = new User(0, '' , '' , 'null');
 
-      this.route.params.subscribe(params =>{
-      if(params['id']=='edit'){
+      this.route.params.subscribe(params => {
+      if (params['id'] === 'edit') {
           this._registroService.viewUser();
           this.active = true;
         }
-    
-      })
+     })
   }
 
   ngOnInit() {
-    this._registroService.userData$.subscribe(data=>{
+    this._registroService.userData$.subscribe(data => {
     this.user.user = data.user;
     this.cdRef.markForCheck();
   })
@@ -59,7 +58,6 @@ export class RegistroComponent implements OnInit, DoCheck {
     this._registroService.goodPsw(this.user.password, this.password2);
     if (!this.pswGood) {
         this.user = registroForm.value;
-        
         this._registroService.setRegistro(this.user);
         this._registroService.goodRegistro$.subscribe(data => {
 
@@ -71,10 +69,9 @@ export class RegistroComponent implements OnInit, DoCheck {
 
         })
       }
-   
   }
 
-  updateUser(){
+  updateUser() {
     this._registroService.updateRegistro(this.user.user);
   }
 

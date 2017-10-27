@@ -17,12 +17,10 @@ export class LoginComponent implements OnInit {
 
   submit() {
     if (this.user && this.password) {
-     
       if (this.user.length >= 1 && this.password.length >= 5) {
           this._loginService.login(this.user, this.password);
       }
-
-    }
+ }
 
   }
 
@@ -33,7 +31,7 @@ export class LoginComponent implements OnInit {
 
   recordPsw(e) {
     if (e.target.checked) {
-      let psw = btoa(this.password);
+      const psw = btoa(this.password);
       localStorage.setItem('psw', psw);
     } else {
       localStorage.removeItem('psw');
@@ -42,8 +40,8 @@ export class LoginComponent implements OnInit {
 
   isRecordPsw() {
     if (localStorage.getItem('psw')) {
-      let value = localStorage.getItem('psw');
-      let daro = atob(value);
+      const value = localStorage.getItem('psw');
+      const daro = atob(value);
       this.password = daro;
     }
   }

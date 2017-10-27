@@ -16,16 +16,16 @@ export class RegistroService {
   private views_users: string = this.url +"views/users";
   private user_exist: string = this.url + "user/exist";
 
-  public registroSource = new Subject<any>();
+  private registroSource = new Subject<any>();
   public goodRegistro$ = this.registroSource.asObservable();
 
-  public pswSource = new Subject<boolean>();
+  private pswSource = new Subject<boolean>();
   public pswGood$ = this.pswSource.asObservable();
 
-  public userSource = new Subject<boolean>();
+  private userSource = new Subject<boolean>();
   public userGood$ = this.userSource.asObservable();
 
-  public userData = new Subject<User>();
+  private userData = new Subject<User>();
   public userData$ = this.userData.asObservable();
 
 
