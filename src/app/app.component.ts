@@ -1,6 +1,7 @@
-import { Component, OnInit, DoCheck, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, DoCheck, ChangeDetectionStrategy, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { LoginService } from './components/login/servicios/login.service';
 import { RegistroService } from './components/login/servicios/registro.service';
+import { Subscription } from 'rxjs/Subscription';
 
 
 @Component({
@@ -9,23 +10,30 @@ import { RegistroService } from './components/login/servicios/registro.service';
   styleUrls: ['./app.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AppComponent implements OnInit, DoCheck {
+export class AppComponent implements OnInit, DoCheck, OnDestroy {
   public logueado: boolean;
-  constructor(public _login: LoginService, private _registro: RegistroService, private cdRef: ChangeDetectorRef) {
+  private endCheckToken: Subscription = null;
+  private endIsLogin: Subscription = null;
+  private endRegistro: Subscription = null;
+
+
+  constructor(public _login: LoginService,
+    private _registro: RegistroService,
+    private cdRef: ChangeDetectorRef) {
 
   }
 
   ngDoCheck() {
-    this._login.checkToken$.subscribe(data => {
+    this.endCheckToken = this._login.checkToken$.subscribe(data => {
       this.logueado = data;
       this.cdRef.markForCheck();
       });
-    this._login.isLogin$.subscribe(data => {
+    this.endIsLogin = this._login.isLogin$.subscribe(data => {
       this.logueado = data;
       this.cdRef.markForCheck();
     });
 
-    this._registro.goodRegistro$.subscribe(data => {
+    this.endRegistro = this._registro.goodRegistro$.subscribe(data => {
       this.logueado = data;
       this.cdRef.markForCheck();
     })
@@ -34,6 +42,14 @@ export class AppComponent implements OnInit, DoCheck {
   ngOnInit() {
     this._login.isSession();
  }
+
+ ngOnDestroy(): void {
+  this.endCheckToken.unsubscribe();
+  this.endIsLogin.unsubscribe();
+  this.endRegistro.unsubscribe();
+}
+
+
 
 
 }

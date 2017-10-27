@@ -23,14 +23,7 @@ export class RegistroComponent implements OnInit, DoCheck {
     private route: ActivatedRoute,
     private router: Router) {
     this.user = new User(0, '' , '' , 'null');
-
-      this.route.params.subscribe(params => {
-      if (params['id'] === 'edit') {
-          this._registroService.viewUser();
-          this.active = true;
-        }
-     })
-  }
+ }
 
   ngOnInit() {
     this._registroService.userData$.subscribe(data => {
@@ -71,9 +64,7 @@ export class RegistroComponent implements OnInit, DoCheck {
       }
   }
 
-  updateUser() {
-    this._registroService.updateRegistro(this.user.user);
-  }
+ 
 
 
 

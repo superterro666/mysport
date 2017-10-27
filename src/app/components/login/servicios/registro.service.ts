@@ -8,13 +8,13 @@ import { Router } from '@angular/router';
 
 @Injectable()
 export class RegistroService {
-  private url = "http://localhost/mysport/web/app_dev.php/";
-  private set_registro: string = this.url+ "set/user";
-  private update_registro: string = this.url +"update/user";
-  private delete_registro: string = this.url+"delete/user";
-  private view_user: string = this.url +"view/user";
-  private views_users: string = this.url +"views/users";
-  private user_exist: string = this.url + "user/exist";
+  private url = 'http://localhost/mysport/web/app_dev.php/';
+  private set_registro: string = this.url + 'set/user';
+  private update_registro: string = this.url + 'update/user';
+  private delete_registro: string = this.url + 'delete/user';
+  private view_user: string = this.url + 'view/user';
+  private views_users: string = this.url + 'views/users';
+  private user_exist: string = this.url + 'user/exist';
 
   private registroSource = new Subject<any>();
   public goodRegistro$ = this.registroSource.asObservable();
@@ -36,25 +36,25 @@ export class RegistroService {
     const headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
     const data = JSON.stringify(user);
     const params = 'json=' + data;
-    this.http.post(this.set_registro, params, { headers: headers }).subscribe(data => {
+    this.http.post(this.set_registro, params, { headers: headers }).subscribe( data => {
 
       if (data['code'] === 200) {
         this.registroSource.next(true);
-        localStorage.setItem('token',JSON.stringify(data['token']));
-        localStorage.setItem('identity',JSON.stringify(data['user']));
+        localStorage.setItem('token', JSON.stringify(data['token']));
+        localStorage.setItem('identity', JSON.stringify(data['user']));
         this.router.navigate(['/home']);
 
-        } else {
+      } else {
         this.registroSource.next(false);
       }
-     });
+    });
   }
 
-  updateRegistro(user: string){
+  updateRegistro(user: string) {
     const headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
     const userData = {
-      user : user,
-      sha : this._loginService.getIdentity().id
+      user: user,
+      sha: this._loginService.getIdentity().id
     }
     const data = JSON.stringify(userData);
 
@@ -62,22 +62,23 @@ export class RegistroService {
     this.http.put(this.update_registro, params, { headers: headers }).subscribe( data => {
 
       if (data['code'] === 200) {
-        this.registroSource.next(true);
         localStorage.setItem('identity', JSON.stringify(data['user']));
+        this.registroSource.next(true);
         this.router.navigate(['/home']);
-       }else{
+      } else {
         this.registroSource.next(false);
       }
-     });
-  }
-
-  deleteRegistro() {}
-  viewUser() {
-    this.http.get<User>(this.view_user + '?id=' + this._loginService.getIdentity().id + '&token=' + this._loginService.getToken())
-    .subscribe(data => {
-    this.userData.next(data);
     });
   }
+
+  deleteRegistro() { }
+  viewUser() {
+       this.http.get<User>(this.view_user + '?id=' + this._loginService.getIdentity().id + '&token=' + this._loginService.getToken())
+      .subscribe(data => {
+        this.userData.next(data);
+      });
+  }
+
 
   viewsUsers() { }
 
@@ -93,10 +94,10 @@ export class RegistroService {
     });
   }
 
-  goodPsw(psw: string, psw2: string){
-    if (psw === psw2){
-        this.pswSource.next(false);
-    }else{
+  goodPsw(psw: string, psw2: string) {
+    if (psw === psw2) {
+      this.pswSource.next(false);
+    } else {
       this.pswSource.next(true);
     }
   }

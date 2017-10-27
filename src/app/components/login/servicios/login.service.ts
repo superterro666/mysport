@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
+import { Router } from '@angular/router';
 
 
 @Injectable()
@@ -11,14 +12,15 @@ export class LoginService {
   private url_checktoken = 'http://localhost/mysport/web/app_dev.php/checktoken';
   private token: string;
   private identity: any;
+
   private loginSource = new Subject<boolean>();
   public isLogin$ = this.loginSource.asObservable();
-  public checkTokenSource = new Subject<boolean>();
+  private checkTokenSource = new Subject<boolean>();
   public checkToken$ = this.checkTokenSource.asObservable();
 
 
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   login(user: string, password: string) {
 
@@ -72,8 +74,9 @@ export class LoginService {
       localStorage.removeItem('token');
       localStorage.removeItem('identity');
       localStorage.removeItem('psw');
-      this.loginSource.next(false);
-    }
+     }
+     this.loginSource.next(false);
+     this.router.navigate(['/home']);
   }
 
   setToken(value: string) {

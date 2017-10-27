@@ -5,7 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { FormsModule } from '@angular/forms';
 
-//SERVICES
+// SERVICES
 import { LoginService } from './components/login/servicios/login.service';
 import { RegistroService } from './components/login/servicios/registro.service';
 
@@ -17,6 +17,7 @@ import { HomeComponent } from './components/home/home.component';
 import { APP_ROUTING } from './app.routes';
 import { LoginComponent } from './components/login/login/login.component';
 import { RegistroComponent } from './components/login/registro/registro.component';
+import { EditRegistroComponent } from './components/login/registro/edit-registro.component';
 
 
 
@@ -25,8 +26,8 @@ import { RegistroComponent } from './components/login/registro/registro.componen
     AppComponent,
     HomeComponent,
     LoginComponent,
-    RegistroComponent
-  
+    RegistroComponent,
+    EditRegistroComponent
   ],
   imports: [
     BrowserModule,
@@ -34,10 +35,8 @@ import { RegistroComponent } from './components/login/registro/registro.componen
     NgbModule.forRoot(),
     HttpClientModule,
     FormsModule
-   
   ],
   providers: [LoginService, RegistroService],
   bootstrap: [AppComponent],
-  
 })
 export class AppModule { }
