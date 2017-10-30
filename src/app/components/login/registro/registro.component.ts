@@ -63,10 +63,4 @@ export class RegistroComponent implements OnInit, DoCheck {
         })
       }
   }
-
- 
-
-
-
-
 }

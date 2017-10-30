@@ -47,11 +47,9 @@ export class LoginService {
   checktoken() {
     this.http.get(this.url_checktoken + '?token=' + this.getToken()).subscribe(data => {
       if (data['code'] === 200) {
-        console.log(200)
-        this.checkTokenSource.next(true);
+         this.checkTokenSource.next(true);
       } else {
         this.checkTokenSource.next(false);
-        console.log(400)
       }
     }, error => {
       console.log(error);

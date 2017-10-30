@@ -1,0 +1,12 @@
+<div class="col-sm- form-group-lg centrar-caja ">
+    <div class="col-sm- form-group-lg ">
+  <fieldset class="form-group">
+  <legend>Editar usuario</legend>
+<form class="form-inline">
+  <label class="sr-only" for="inlineFormInput">Editar Usuario</label>
+  <input type="text" name="user" [(ngModel)]="user" class="form-control mb-2 mr-sm-2 mb-sm-0"
+  id="inlineFormInput" placeholder="Usuario">
+  <button type="button" class="btn btn-success" (click)="updateUser()" [disabled]="userGood">Actualizar</button>
+  </form>
+  </fieldset>
+</div>

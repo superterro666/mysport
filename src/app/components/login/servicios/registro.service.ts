@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { User } from '../../../modelos/user.model';
 import { LoginService } from './login.service';
 import { Router } from '@angular/router';
@@ -28,6 +29,9 @@ export class RegistroService {
   private userData = new Subject<User>();
   public userData$ = this.userData.asObservable();
 
+  private editUserSource = new BehaviorSubject<string>('');
+  public editUser$ = this.editUserSource.asObservable();
+
 
 
   constructor(private http: HttpClient, private _loginService: LoginService, private router: Router) { }
@@ -37,11 +41,10 @@ export class RegistroService {
     const data = JSON.stringify(user);
     const params = 'json=' + data;
     this.http.post(this.set_registro, params, { headers: headers }).subscribe( data => {
-
-      if (data['code'] === 200) {
-        this.registroSource.next(true);
-        localStorage.setItem('token', JSON.stringify(data['token']));
-        localStorage.setItem('identity', JSON.stringify(data['user']));
+        if (data['code'] === 200) {
+        this.registroSource.next(false);
+       // localStorage.setItem('token', JSON.stringify(data['token']));
+       // localStorage.setItem('identity', JSON.stringify(data['user']));
         this.router.navigate(['/home']);
 
       } else {
@@ -66,17 +69,23 @@ export class RegistroService {
         this.registroSource.next(true);
         this.router.navigate(['/home']);
       } else {
+        console.log(data);
         this.registroSource.next(false);
       }
     });
   }
 
   deleteRegistro() { }
+
   viewUser() {
-       this.http.get<User>(this.view_user + '?id=' + this._loginService.getIdentity().id + '&token=' + this._loginService.getToken())
-      .subscribe(data => {
-        this.userData.next(data);
-      });
+    // tslint:disable-next-line:max-line-length
+    // tslint:disable-next-line:curly
+    if (this._loginService.getIdentity() && this._loginService.getToken()) {
+      this.http.get<User>(this.view_user + '?id=' + this._loginService.getIdentity().id +
+        '&token=' + this._loginService.getToken()).subscribe(data => {
+          this.editUserSource.next(data.user);
+        });
+    }
   }
 
 

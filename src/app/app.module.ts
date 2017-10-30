@@ -8,16 +8,19 @@ import { FormsModule } from '@angular/forms';
 // SERVICES
 import { LoginService } from './components/login/servicios/login.service';
 import { RegistroService } from './components/login/servicios/registro.service';
+import { AuthGuard } from './components/login/servicios/auth-guard.service';
 
 
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 
+
 import { APP_ROUTING } from './app.routes';
 import { LoginComponent } from './components/login/login/login.component';
 import { RegistroComponent } from './components/login/registro/registro.component';
-import { EditRegistroComponent } from './components/login/registro/edit-registro.component';
+import { EditRegistroComponent } from './components/login/registro/edit-registro/edit-registro.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 
 
@@ -27,7 +30,8 @@ import { EditRegistroComponent } from './components/login/registro/edit-registro
     HomeComponent,
     LoginComponent,
     RegistroComponent,
-    EditRegistroComponent
+    EditRegistroComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +40,7 @@ import { EditRegistroComponent } from './components/login/registro/edit-registro
     HttpClientModule,
     FormsModule
   ],
-  providers: [LoginService, RegistroService],
+  providers: [LoginService, RegistroService, AuthGuard],
   bootstrap: [AppComponent],
 })
 export class AppModule { }
