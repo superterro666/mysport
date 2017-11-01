@@ -21,6 +21,8 @@ import { LoginComponent } from './components/login/login/login.component';
 import { RegistroComponent } from './components/login/registro/registro.component';
 import { EditRegistroComponent } from './components/login/registro/edit-registro/edit-registro.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { AddComponent } from './components/ejercicios/add/add.component';
+
 
 
 
@@ -31,7 +33,9 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     LoginComponent,
     RegistroComponent,
     EditRegistroComponent,
-    NavbarComponent
+    NavbarComponent,
+    AddComponent,
+
   ],
   imports: [
     BrowserModule,

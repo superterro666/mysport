@@ -1,0 +1,45 @@
+
+  
+  
+  <div class="col-sm-4 form-group-lg">
+    <fieldset class="form-group">
+    <legend>Add ejercicio</legend>
+    
+  <form #ejercicioForm="ngForm" (ngSubmit)="submit(ejercicioForm)" novalidate>
+  
+    
+    
+    <div class="form-group">
+      <label for="formGroupExampleInput">Nombre</label>
+  
+      <input type="text" name="user" [(ngModel)]="ejercicio.nombre"  class="form-control"  id="formGroupExampleInput" placeholder="Nombre" required>
+    
+    </div>
+  
+    
+    <div class="form-group" >
+      <label for="formGroupExampleInput2">Tipo</label>
+      <select type="text" name="password" [(ngModel)]="ejercicio.tipo" class="form-control" id="formGroupExampleInput2" placeholder="Password" required>
+        <option value="1">Aerobicos</option>
+        <option value="2">Anaerobicos</option>
+        </select>
+
+    </div>
+
+
+
+  
+    <div class="form-group">
+        <label for="formGroupExampleInput2">Max</label>
+        <input type="text" name="max" [(ngModel)]="ejercicio.max" class="form-control" id="formGroupExampleInput2" placeholder="Maximo" required>
+    </div>
+  
+      <hr>
+      <button type="submit"  class="btn btn-primary"  [disabled]="!ejercicioForm.form.valid" >Registrar</button>
+     
+  
+    
+      
+  </form>
+    </fieldset>
+  </div>

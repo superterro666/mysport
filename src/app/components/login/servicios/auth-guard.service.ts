@@ -10,11 +10,12 @@ export class AuthGuard implements CanActivate, CanActivateChild {
     this._loginService.checktoken();
     // tslint:disable-next-line:curly
     if (this._loginService.checkToken$.subscribe(data => {
-         this.status = data;
+        this.status = data;
     }))
-
-    return this.status;
-   }
+    if (this.status !== undefined) {
+      return this.status;
+    }
+    }
 
   canActivateChild() {
     console.log('checking child route access');

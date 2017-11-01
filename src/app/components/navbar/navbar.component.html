@@ -1,43 +1,55 @@
-<nav class="navbar navbar-toggleable-md navbar-light bg-faded">
-  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-  </button>
-  <a class="navbar-brand" href="#">Mysport </a>
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent" >
-      <ul class="navbar-nav mr-auto" *ngIf="logueado">
-          <li class="nav-item active">
-              <a class="nav-link" href="#">Home</a>
-          </li>
-          <li class="nav-item">
-              <a class="nav-link">Registros</a>
-          </li>
-          <li class="nav-item">
-              <a class="nav-link" href="#">Disabled</a>
-          </li>
-      </ul>
-
-
-      <app-login *ngIf="!logueado"></app-login>
-
-      <div class="row" *ngIf="logueado">
+<div class="row">
+    <div class="col">
+        <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand" href="#">Mysport </a>
           
-          <div class="col">
-              <img src="" width="35px" height="35px" class="img-circle" />
-          </div>
-          <div class="col">
-              <div ngbDropdown class="d-inline-block">
-                  <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Usuario</button>
-                  <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                      <button class="dropdown-item" [routerLink]="['/edit-registro']">Editar</button>
-                      <button class="dropdown-item">Ver</button>
-                      <button class="dropdown-item" (click)="_login.logout()">Logout</button>
-                  </div>
-              </div>
-          </div>
-
-
-      </div>
-  </div>
-</nav>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent" >
+                <ul class="navbar-nav mr-auto" *ngIf="logueado">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                          
+                                  <div ngbDropdown class="d-inline-block">
+                                    <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Registros</button>
+                                    <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                                      <button class="dropdown-item" [routerLink]="['/add-ejercicio']">Ejercicios</button>
+                                      <button class="dropdown-item">Tipos</button>
+                                      <button class="dropdown-item">Clases</button>
+                                    </div>
+                                  </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Disabled</a>
+                    </li>
+                </ul>
+          
+          
+                <app-login *ngIf="!logueado"></app-login>
+          
+                <div class="row" *ngIf="logueado">
+                    
+                    <div class="col">
+                        <img src="" width="35px" height="35px" class="img-circle" />
+                    </div>
+                    <div class="col">
+                        <div ngbDropdown class="d-inline-block">
+                            <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Usuario</button>
+                            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                                <button class="dropdown-item" [routerLink]="['/edit-registro']">Editar</button>
+                                <button class="dropdown-item">Ver</button>
+                                <button class="dropdown-item" (click)="_login.logout()">Logout</button>
+                            </div>
+                        </div>
+                    </div>
+          
+          
+                </div>
+            </div>
+          </nav>
+    </div>
+</div>
